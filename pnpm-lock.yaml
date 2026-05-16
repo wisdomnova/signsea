@@ -17,9 +17,6 @@ importers:
       '@tabler/icons-react':
         specifier: ^3.44.0
         version: 3.44.0(react@19.2.3)
-      '@tailwindcss/postcss':
-        specifier: ^4.2.1
-        version: 4.2.1
       '@tanstack/react-query':
         specifier: ^5.90.21
         version: 5.91.0(react@19.2.3)
@@ -90,6 +87,9 @@ importers:
         specifier: ^4.3.6
         version: 4.3.6
     devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4.2.1
+        version: 4.2.1
       '@types/node':
         specifier: ^20.19.35
         version: 20.19.37
