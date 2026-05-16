@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular;
+  
+  /* Adding local flavor to the palette */
+  --color-deep: #FFFFFF;
+  --color-signal: #111111;
+  --color-kobo: #0A5F38; /* Nigerian Green - deep and professional */
+  --color-naira: #E1FBED; /* Soft mint for backgrounds */
+  --color-neutral-subtle: #666666;
+  --color-border-subtle: #F0F0F0;
+}
+
+@layer base {
+  *, ::before, ::after {
+    border-color: var(--color-border-subtle);
+    font-style: normal !important; /* Strict no italics */
+  }
+
+  body {
+    background-color: var(--color-deep);
+    color: var(--color-signal);
+    font-feature-settings: "ss01", "ss02", "cv01", "cv11";
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.04em;
+    font-weight: 700;
+  }
+
+  button, 
+  a {
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

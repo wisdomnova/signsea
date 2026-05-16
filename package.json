@@ -1,0 +1,46 @@
+{
+  "name": "signsea",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "postinstall": ""
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
+    "@sentry/nextjs": "^10.40.0",
+    "@tabler/icons-react": "^3.44.0",
+    "@tailwindcss/postcss": "^4.2.1",
+    "@tanstack/react-query": "^5.90.21",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.36.3",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.0.0",
+    "dotenv": "^17.3.1",
+    "framer-motion": "^12.34.3",
+    "geist": "^1.7.0",
+    "jose": "^6.1.3",
+    "lucide-react": "^1.14.0",
+    "next": "16.1.6",
+    "next-themes": "^0.4.6",
+    "paystack": "^2.0.1",
+    "postcss": "^8.5.6",
+    "postcss-loader": "^8.2.1",
+    "qrcode.react": "^4.2.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-hook-form": "^7.71.2",
+    "react-pdf": "^10.4.1",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.35",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.9.3"
+  }
+}
