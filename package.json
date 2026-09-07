@@ -1,6 +1,25 @@
 {
   "name": "signsea",
   "version": "0.1.0",
+  "description": "Industrial payment infrastructure & milestone-based escrow platform for high-trust digital commerce and freelance contracts.",
+  "homepage": "https://signsea.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wisdomnova/signsea.git"
+  },
+  "keywords": [
+    "escrow",
+    "payments",
+    "fintech",
+    "nextjs",
+    "typescript",
+    "paystack",
+    "fastify",
+    "escrow-platform",
+    "invoicing",
+    "milestones",
+    "freelance"
+  ],
   "private": true,
   "scripts": {
     "dev": "next dev",
