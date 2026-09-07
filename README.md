@@ -10,7 +10,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38bdf8?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
-[Live Demo](https://signsea.org) • [Backend API Repository](https://github.com/wisdomnova/proofchain) • [Documentation](https://signsea.org)
+[Live Demo](https://signsea.org) • [Backend API Repository](https://github.com/wisdomnova/signsea-backend) • [Documentation](https://signsea.org)
 
 </div>
 
