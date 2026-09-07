@@ -3,6 +3,7 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { CurrencyProvider } from '@/lib/currency-context'
 import { jsonLd, organizationSchema } from '@/lib/schema'
+import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -88,6 +89,7 @@ export default function RootLayout({
         <CurrencyProvider>
           {children}
         </CurrencyProvider>
+        <Analytics />
       </body>
     </html>
   )
