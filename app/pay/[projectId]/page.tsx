@@ -54,6 +54,8 @@ export default function ClientPaymentPage() {
     setToast({ isOpen: true, message, type })
   }
 
+  const searchParams = useSearchParams()
+
   useEffect(() => {
     async function loadProject() {
       if (!projectId) return
@@ -61,8 +63,41 @@ export default function ClientPaymentPage() {
         setLoading(true)
         const data: any = await apiClient.request('/projects/' + projectId, 'GET')
         setProject(data)
+        
+        // Handle return from Paystack redirect (e.g. mobile payment)
+        const ref = searchParams?.get('reference') || searchParams?.get('trxref')
+        if (ref && !data?.payment_received_at) {
+          try {
+            setIsPaymentLoading(true)
+            showToast('Verifying payment...', 'loading')
+            const verifyRes: any = await apiClient.request(
+              `/projects/${projectId}/verify-payment`,
+              'POST',
+              { reference: ref }
+            )
+            if (verifyRes.success) {
+              setIsPaid(true)
+              setIsPaymentLoading(false)
+              showToast('Payment successful! Please set your release passcode.', 'success')
+              const updatedProject: any = await apiClient.request('/projects/' + projectId, 'GET')
+              setProject(updatedProject)
+              if (!updatedProject?.passcode_created_at) {
+                setShowPasscodeModal(true)
+              }
+              return
+            }
+          } catch (e: any) {
+            console.error('Auto verify error:', e)
+          } finally {
+            setIsPaymentLoading(false)
+          }
+        }
+
         if (data?.payment_received_at) {
           setIsPaid(true)
+          if (!data?.passcode_created_at) {
+            setShowPasscodeModal(true)
+          }
         }
         if (data?.passcode_created_at) {
           setPasscodeSaved(true)
@@ -71,10 +106,11 @@ export default function ClientPaymentPage() {
         console.error('Failed to load project:', err)
       } finally {
         setLoading(false)
+        setIsPaymentLoading(false)
       }
     }
     loadProject()
-  }, [projectId])
+  }, [projectId, searchParams])
 
   // Load Paystack script
   useEffect(() => {
