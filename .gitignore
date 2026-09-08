@@ -53,3 +53,4 @@ out/
 # Misc build files
 tsconfig.tsbuildinfo
 logo-gen.js
+.vercel

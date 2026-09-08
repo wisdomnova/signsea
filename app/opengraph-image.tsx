@@ -8,23 +8,33 @@ export const size = {
 export const contentType = 'image/png'
 
 export default async function Image() {
-  // Fetch Geist font files directly for crisp typography rendering
-  const [geistBoldData, geistRegularData, geistMonoData] = await Promise.all([
-    fetch('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/Geist-Bold.ttf').then((res) =>
-      res.arrayBuffer()
-    ),
-    fetch('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/Geist-Regular.ttf').then((res) =>
-      res.arrayBuffer()
-    ),
-    fetch('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-mono/GeistMono-Regular.ttf').then((res) =>
-      res.arrayBuffer()
-    ),
+  // Fetch Geist font files for crisp typography rendering
+  const [geistBoldData, geistRegularData] = await Promise.all([
+    fetch('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/Geist-Bold.ttf')
+      .then((res) => res.arrayBuffer())
+      .catch(() => null),
+    fetch('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/Geist-Regular.ttf')
+      .then((res) => res.arrayBuffer())
+      .catch(() => null),
   ])
 
-  // Grid cell dimensions (10 columns x 5 rows across 1200x630 canvas)
-  const cellSize = 100
-  const startX = 100
-  const startY = 65
+  const fonts: any[] = []
+  if (geistBoldData) {
+    fonts.push({
+      name: 'Geist',
+      data: geistBoldData,
+      weight: 700,
+      style: 'normal',
+    })
+  }
+  if (geistRegularData) {
+    fonts.push({
+      name: 'Geist',
+      data: geistRegularData,
+      weight: 400,
+      style: 'normal',
+    })
+  }
 
   return new ImageResponse(
     (
@@ -33,234 +43,248 @@ export default async function Image() {
           width: '100%',
           height: '100%',
           display: 'flex',
-          backgroundColor: '#fafafa',
-          color: '#000000',
-          fontFamily: 'Geist, system-ui, sans-serif',
+          backgroundColor: '#06040A',
+          color: '#ffffff',
+          fontFamily: 'Geist, system-ui, -apple-system, sans-serif',
           position: 'relative',
           overflow: 'hidden',
         }}
       >
-        {/* Full Grid Lines Matrix (Light Mode Architectural Grid) */}
-        <div
+        {/* Background Concentric Radiant Glow & Curves (Inspired by Reference 3) */}
+        <svg
+          width="1200"
+          height="630"
+          viewBox="0 0 1200 630"
           style={{
             position: 'absolute',
             top: 0,
             left: 0,
-            right: 0,
-            bottom: 0,
-            display: 'flex',
-            backgroundImage:
-              'linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px)',
-            backgroundSize: '100px 100px',
-            backgroundPosition: '0 15px',
+            width: '100%',
+            height: '100%',
           }}
-        />
+        >
+          <defs>
+            {/* Deep Cosmic Radial Gradient */}
+            <radialGradient id="bgGlow" cx="82%" cy="80%" r="85%" fx="82%" fy="80%">
+              <stop offset="0%" stopColor="#2E1065" stopOpacity="0.85" />
+              <stop offset="25%" stopColor="#1E0B3C" stopOpacity="0.75" />
+              <stop offset="55%" stopColor="#0F061E" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#050308" stopOpacity="1" />
+            </radialGradient>
 
-        {/* Minimalist Grid Matrix Layout (Inspired by Reference 2 & 3) */}
-        
-        {/* Top-Right Accent Black Block */}
+            {/* Vibrant Core Glow at Bottom Right */}
+            <radialGradient id="coreAura" cx="84%" cy="82%" r="35%">
+              <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.45" />
+              <stop offset="40%" stopColor="#6366F1" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#06040A" stopOpacity="0" />
+            </radialGradient>
+
+            {/* Linear strokes for concentric rounded stadium rings */}
+            <linearGradient id="ringGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#A78BFA" stopOpacity="0.25" />
+              <stop offset="70%" stopColor="#7C3AED" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#C4B5FD" stopOpacity="0.8" />
+            </linearGradient>
+
+            <linearGradient id="ringGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#818CF8" stopOpacity="0.12" />
+              <stop offset="70%" stopColor="#4F46E5" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#A5B4FC" stopOpacity="0.5" />
+            </linearGradient>
+
+            <linearGradient id="ringGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#6366F1" stopOpacity="0.05" />
+              <stop offset="100%" stopColor="#4338CA" stopOpacity="0.2" />
+            </linearGradient>
+
+            <linearGradient id="logoBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#1E1B4B" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#0F0D24" stopOpacity="0.95" />
+            </linearGradient>
+          </defs>
+
+          {/* Base Ambient Canvas */}
+          <rect width="1200" height="630" fill="url(#bgGlow)" />
+          <rect width="1200" height="630" fill="url(#coreAura)" />
+
+          {/* Concentric Layered Curved Horizons radiating toward bottom right */}
+          {/* Outer Ring 5 */}
+          <rect
+            x="20"
+            y="-180"
+            width="1400"
+            height="950"
+            rx="475"
+            fill="none"
+            stroke="rgba(139, 92, 246, 0.07)"
+            strokeWidth="1.5"
+          />
+
+          {/* Outer Ring 4 */}
+          <rect
+            x="180"
+            y="-80"
+            width="1200"
+            height="850"
+            rx="425"
+            fill="none"
+            stroke="url(#ringGrad3)"
+            strokeWidth="2"
+          />
+
+          {/* Middle Ring 3 */}
+          <rect
+            x="340"
+            y="20"
+            width="1000"
+            height="750"
+            rx="375"
+            fill="rgba(124, 58, 237, 0.04)"
+            stroke="url(#ringGrad2)"
+            strokeWidth="2.5"
+          />
+
+          {/* Inner Ring 2 */}
+          <rect
+            x="500"
+            y="120"
+            width="800"
+            height="650"
+            rx="325"
+            fill="rgba(139, 92, 246, 0.07)"
+            stroke="url(#ringGrad1)"
+            strokeWidth="3"
+          />
+
+          {/* Core Focus Ring 1 */}
+          <rect
+            x="660"
+            y="220"
+            width="620"
+            height="550"
+            rx="275"
+            fill="rgba(167, 139, 250, 0.1)"
+            stroke="rgba(196, 181, 253, 0.7)"
+            strokeWidth="3.5"
+          />
+
+          {/* Innermost Horizon Fill */}
+          <rect
+            x="780"
+            y="320"
+            width="480"
+            height="450"
+            rx="225"
+            fill="rgba(147, 51, 234, 0.16)"
+            stroke="rgba(233, 213, 255, 0.85)"
+            strokeWidth="2"
+          />
+
+          {/* Scattered Subtle 4-Point Sparkling Stars (Inspired by Reference 2 & 3) */}
+          {/* Star 1 - Top Left */}
+          <g transform="translate(180, 140)" opacity="0.65">
+            <path d="M0,-12 Q0,0 12,0 Q0,0 0,12 Q0,0 -12,0 Q0,0 0,-12 Z" fill="#ffffff" />
+          </g>
+
+          {/* Star 2 - Top Center */}
+          <g transform="translate(540, 95)" opacity="0.8">
+            <path d="M0,-16 Q0,0 16,0 Q0,0 0,16 Q0,0 -16,0 Q0,0 0,-16 Z" fill="#ffffff" />
+          </g>
+
+          {/* Star 3 - Mid Left */}
+          <g transform="translate(110, 360)" opacity="0.4">
+            <path d="M0,-8 Q0,0 8,0 Q0,0 0,8 Q0,0 -8,0 Q0,0 0,-8 Z" fill="#ffffff" />
+          </g>
+
+          {/* Star 4 - Mid Center Upper */}
+          <g transform="translate(420, 290)" opacity="0.55">
+            <path d="M0,-10 Q0,0 10,0 Q0,0 0,10 Q0,0 -10,0 Q0,0 0,-10 Z" fill="#ffffff" />
+          </g>
+
+          {/* Star 5 - Top Right */}
+          <g transform="translate(980, 110)" opacity="0.85">
+            <path d="M0,-18 Q0,0 18,0 Q0,0 0,18 Q0,0 -18,0 Q0,0 0,-18 Z" fill="#ffffff" />
+          </g>
+
+          {/* Star 6 - Center Right */}
+          <g transform="translate(820, 210)" opacity="0.7">
+            <path d="M0,-11 Q0,0 11,0 Q0,0 0,11 Q0,0 -11,0 Q0,0 0,-11 Z" fill="#ffffff" />
+          </g>
+
+          {/* Small micro star dust points */}
+          <circle cx="280" cy="220" r="1.5" fill="#ffffff" opacity="0.4" />
+          <circle cx="340" cy="460" r="1.8" fill="#ffffff" opacity="0.5" />
+          <circle cx="680" cy="150" r="2" fill="#ffffff" opacity="0.6" />
+          <circle cx="890" cy="80" r="1.5" fill="#ffffff" opacity="0.45" />
+          <circle cx="1060" cy="260" r="2" fill="#ffffff" opacity="0.55" />
+          <circle cx="220" cy="510" r="1.2" fill="#ffffff" opacity="0.35" />
+        </svg>
+
+        {/* BOTTOM RIGHT CORNER: Pure, Minimalist, Precise Logo & Text */}
         <div
           style={{
             position: 'absolute',
-            top: '115px',
-            right: '200px',
-            width: '100px',
-            height: '100px',
-            backgroundColor: '#000000',
-            display: 'flex',
-          }}
-        />
-
-        {/* Electric Cobalt Blue Block with Anchor Icon */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '215px',
-            right: '300px',
-            width: '100px',
-            height: '100px',
-            backgroundColor: '#0052FF',
+            bottom: '68px',
+            right: '80px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
+            gap: '22px',
+            zIndex: 50,
           }}
         >
-          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="square">
-            <path d="M12 8v13" />
-            <path d="M4 14a8 8 0 0 0 16 0" />
-            <path d="M19 14h2" />
-            <path d="M3 14h2" />
-            <circle cx="12" cy="5" r="3" />
-          </svg>
-        </div>
-
-        {/* Subtle Peach/Coral Accent Tile */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '315px',
-            right: '200px',
-            width: '100px',
-            height: '100px',
-            backgroundColor: '#ffedea',
-            border: '1px solid rgba(0,0,0,0.06)',
-            display: 'flex',
-          }}
-        />
-
-        {/* Soft Grey Accent Tile */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '215px',
-            right: '100px',
-            width: '100px',
-            height: '100px',
-            backgroundColor: '#ffffff',
-            border: '1px solid rgba(0,0,0,0.06)',
-            display: 'flex',
-          }}
-        />
-
-        {/* Main Clean Typographic Core */}
-        <div
-          style={{
-            position: 'absolute',
-            left: '100px',
-            top: '160px',
-            display: 'flex',
-            flexDirection: 'column',
-            zIndex: 10,
-          }}
-        >
-          {/* Top Label */}
+          {/* Logo Mark Icon Container */}
           <div
             style={{
+              width: '68px',
+              height: '68px',
+              borderRadius: '18px',
+              backgroundColor: 'rgba(255, 255, 255, 0.98)',
               display: 'flex',
               alignItems: 'center',
-              gap: '12px',
-              marginBottom: '20px',
+              justifyContent: 'center',
+              boxShadow:
+                '0 0 40px rgba(167, 139, 250, 0.6), 0 0 80px rgba(124, 58, 237, 0.35), 0 12px 24px rgba(0, 0, 0, 0.6)',
+              border: '1px solid rgba(255, 255, 255, 0.8)',
             }}
           >
-            <div
-              style={{
-                width: '8px',
-                height: '8px',
-                backgroundColor: '#0052FF',
-                display: 'flex',
-              }}
-            />
-            <span
-              style={{
-                fontFamily: 'GeistMono, monospace',
-                fontSize: '13px',
-                letterSpacing: '0.12em',
-                color: '#666666',
-                textTransform: 'uppercase',
-              }}
+            {/* SignSea Anchor Mark */}
+            <svg
+              width="38"
+              height="38"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#070510"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              Escrow & Payment Infrastructure
-            </span>
+              <path d="M12 9v12" />
+              <path d="M4 13a8 8 0 0 0 16 0" />
+              <path d="M19 13h2" />
+              <path d="M3 13h2" />
+              <circle cx="12" cy="6" r="3" />
+            </svg>
           </div>
 
-          {/* Main Title with Superscript */}
+          {/* Typography: "SignSea" */}
           <div
             style={{
               display: 'flex',
-              alignItems: 'flex-start',
-              gap: '12px',
+              flexDirection: 'column',
+              justifyContent: 'center',
             }}
           >
-            <h1
+            <span
               style={{
-                fontSize: '92px',
+                fontSize: '52px',
                 fontWeight: 700,
-                color: '#000000',
                 letterSpacing: '-0.04em',
-                lineHeight: '0.95',
-                margin: 0,
+                color: '#ffffff',
+                lineHeight: 1,
+                textShadow: '0 4px 24px rgba(0, 0, 0, 0.8)',
               }}
             >
               SignSea
-            </h1>
-            <span
-              style={{
-                fontFamily: 'GeistMono, monospace',
-                fontSize: '16px',
-                fontWeight: 600,
-                color: '#000000',
-                letterSpacing: '0.08em',
-                marginTop: '10px',
-              }}
-            >
-              // 01
-            </span>
-          </div>
-
-          {/* Minimalist Subtitle */}
-          <p
-            style={{
-              fontSize: '24px',
-              fontWeight: 400,
-              color: '#555555',
-              letterSpacing: '-0.02em',
-              margin: '28px 0 0 0',
-              maxWidth: '520px',
-              lineHeight: '1.35',
-            }}
-          >
-            High-trust milestone escrow and verifiable financial settlements for modern contracts.
-          </p>
-        </div>
-
-        {/* Minimalist Bottom Bar */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '48px',
-            left: '100px',
-            right: '100px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            borderTop: '1px solid rgba(0, 0, 0, 0.08)',
-            paddingTop: '20px',
-          }}
-        >
-          <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
-            <span
-              style={{
-                fontFamily: 'GeistMono, monospace',
-                fontSize: '13px',
-                color: '#888888',
-                letterSpacing: '0.05em',
-              }}
-            >
-              SPEC: MILESTONE_LOCKED
-            </span>
-            <span
-              style={{
-                fontFamily: 'GeistMono, monospace',
-                fontSize: '13px',
-                color: '#888888',
-                letterSpacing: '0.05em',
-              }}
-            >
-              VERIFICATION: BVN // NIN
-            </span>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span
-              style={{
-                fontFamily: 'GeistMono, monospace',
-                fontSize: '15px',
-                fontWeight: 600,
-                color: '#000000',
-                letterSpacing: '0.02em',
-              }}
-            >
-              signsea.org
             </span>
           </div>
         </div>
@@ -268,26 +292,7 @@ export default async function Image() {
     ),
     {
       ...size,
-      fonts: [
-        {
-          name: 'Geist',
-          data: geistBoldData,
-          style: 'normal',
-          weight: 700,
-        },
-        {
-          name: 'Geist',
-          data: geistRegularData,
-          style: 'normal',
-          weight: 400,
-        },
-        {
-          name: 'GeistMono',
-          data: geistMonoData,
-          style: 'normal',
-          weight: 400,
-        },
-      ],
+      fonts: fonts.length > 0 ? fonts : undefined,
     }
   )
 }
