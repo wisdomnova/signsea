@@ -57,11 +57,7 @@ export class ApiClient {
     })
 
     if (response.status === 401) {
-      // Only redirect to login if we are not on a public page
-      if (typeof window !== 'undefined' && !window.location.pathname.startsWith('/pay/')) {
-        this.clearAuth()
-        window.location.href = '/auth/login'
-      }
+      this.clearAuth()
       throw new Error('Unauthorized')
     }
 

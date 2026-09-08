@@ -27,17 +27,19 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const loadCurrency = async () => {
       try {
-        // Try fetch from backend first
+        const saved = localStorage.getItem('selectedCurrency')
+        if (saved) setSelectedCurrency(saved)
+
         const { apiClient } = await import('./api-client')
+        const token = apiClient.getAccessToken()
+        if (!token) return
+
         const user = await apiClient.getMe() as any
         if (user && user.preferred_currency) {
           setSelectedCurrency(user.preferred_currency)
-          return
         }
       } catch (err) {
-        // Fallback to localStorage if backend/auth fails
-        const saved = localStorage.getItem('selectedCurrency')
-        if (saved) setSelectedCurrency(saved)
+        // Fallback gracefully
       }
     }
     loadCurrency()
