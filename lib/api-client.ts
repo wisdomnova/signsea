@@ -2,15 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-const getBaseApiUrl = () => {
-  const env = process.env.NEXT_PUBLIC_API_URL
-  if (env && !env.includes('signsea-api.org')) {
-    return env.replace(/\/+$/, '')
-  }
-  return 'https://signsea-backend-api-726aa6924363.herokuapp.com'
-}
-
-const API_URL = getBaseApiUrl()
+const API_URL = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/+$/, '')
 
 export class ApiClient {
   private accessToken: string | null = null
