@@ -2,7 +2,15 @@
 
 import { useEffect, useState } from 'react'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'
+const getBaseApiUrl = () => {
+  const env = process.env.NEXT_PUBLIC_API_URL
+  if (env && !env.includes('signsea-api.org')) {
+    return env.replace(/\/+$/, '')
+  }
+  return 'https://signsea-backend-api-726aa6924363.herokuapp.com'
+}
+
+const API_URL = getBaseApiUrl()
 
 export class ApiClient {
   private accessToken: string | null = null
@@ -300,6 +308,24 @@ export class ApiClient {
 
   recalculateReputation() {
     return this.request('/reputation/recalculate', 'POST')
+  }
+
+  // Notifications
+  getNotifications(limit = 50, offset = 0) {
+    return this.request<any>(`/notifications?limit=${limit}&offset=${offset}`, 'GET')
+  }
+
+  markNotificationRead(notificationId: string) {
+    return this.request<any>(`/notifications/${notificationId}/read`, 'POST')
+  }
+
+  markAllNotificationsRead() {
+    return this.request<any>('/notifications/mark-all-read', 'POST')
+  }
+
+  getInvoicePdfUrl(invoiceId: string) {
+    const token = this.getAccessToken()
+    return `${API_URL}/invoices/${invoiceId}/pdf?token=${encodeURIComponent(token || '')}`
   }
 }
 

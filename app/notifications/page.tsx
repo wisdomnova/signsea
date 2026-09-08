@@ -37,12 +37,7 @@ export default function NotificationsPage() {
   const fetchNotifications = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://localhost:3001/notifications', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      })
-      const data = await response.json()
+      const data = await apiClient.getNotifications()
       setNotifications(data.notifications || [])
       setUnreadCount(data.unread || 0)
     } catch (error) {
@@ -54,12 +49,7 @@ export default function NotificationsPage() {
 
   const markAsRead = async (notificationId: string) => {
     try {
-      await fetch(`http://localhost:3001/notifications/${notificationId}/read`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      })
+      await apiClient.markNotificationRead(notificationId)
       // Update local state
       setNotifications(notifications.map(n => 
         n.id === notificationId ? { ...n, read_at: new Date().toISOString() } : n
@@ -72,12 +62,7 @@ export default function NotificationsPage() {
 
   const markAllAsRead = async () => {
     try {
-      await fetch('http://localhost:3001/notifications/mark-all-read', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      })
+      await apiClient.markAllNotificationsRead()
       // Update local state
       setNotifications(notifications.map(n => ({ ...n, read_at: new Date().toISOString() })))
       setUnreadCount(0)

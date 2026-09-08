@@ -81,8 +81,7 @@ export default function InvoiceViewPage() {
           </Link>
           <button 
             onClick={() => {
-              const token = localStorage.getItem('accessToken') || ''
-              window.open(`http://localhost:3001/invoices/${invoice.id}/pdf?token=${token}`)
+              window.open(apiClient.getInvoicePdfUrl(invoice.id), '_blank')
             }}
             className="flex items-center gap-2 px-6 h-11 bg-black text-white rounded-full text-[14px] font-bold hover:bg-gray-800 transition-all"
           >
