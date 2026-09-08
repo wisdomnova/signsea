@@ -175,40 +175,6 @@ export default async function Image() {
             stroke="rgba(240, 249, 255, 0.95)"
             strokeWidth="2"
           />
-
-          {/* Oceanic Caustic Shimmers & Light Gleams */}
-          {/* Shimmer 1 - Top Left */}
-          <g transform="translate(180, 140)" opacity="0.75">
-            <path d="M0,-14 Q0,0 14,0 Q0,0 0,14 Q0,0 -14,0 Q0,0 0,-14 Z" fill="#E0F2FE" />
-          </g>
-
-          {/* Shimmer 2 - Top Center */}
-          <g transform="translate(560, 95)" opacity="0.85">
-            <path d="M0,-18 Q0,0 18,0 Q0,0 0,18 Q0,0 -18,0 Q0,0 0,-18 Z" fill="#FFFFFF" />
-          </g>
-
-          {/* Shimmer 3 - Mid Left */}
-          <g transform="translate(120, 380)" opacity="0.45">
-            <path d="M0,-9 Q0,0 9,0 Q0,0 0,9 Q0,0 -9,0 Q0,0 0,-9 Z" fill="#7DD3FC" />
-          </g>
-
-          {/* Shimmer 4 - Upper Right */}
-          <g transform="translate(1020, 110)" opacity="0.9">
-            <path d="M0,-20 Q0,0 20,0 Q0,0 0,20 Q0,0 -20,0 Q0,0 0,-20 Z" fill="#FFFFFF" />
-          </g>
-
-          {/* Shimmer 5 - Right Center */}
-          <g transform="translate(850, 210)" opacity="0.7">
-            <path d="M0,-12 Q0,0 12,0 Q0,0 0,12 Q0,0 -12,0 Q0,0 0,-12 Z" fill="#E0F2FE" />
-          </g>
-
-          {/* Marine Bioluminescent Micro-Points */}
-          <circle cx="300" cy="230" r="1.8" fill="#38BDF8" opacity="0.5" />
-          <circle cx="440" cy="480" r="2" fill="#7DD3FC" opacity="0.6" />
-          <circle cx="710" cy="140" r="2.2" fill="#BAE6FD" opacity="0.65" />
-          <circle cx="920" cy="70" r="1.6" fill="#E0F2FE" opacity="0.55" />
-          <circle cx="1090" cy="270" r="2" fill="#38BDF8" opacity="0.65" />
-          <circle cx="230" cy="520" r="1.4" fill="#0284C7" opacity="0.4" />
         </svg>
 
         {/* BOTTOM RIGHT CORNER: Pure, Minimalist, Precise Logo & Text */}
