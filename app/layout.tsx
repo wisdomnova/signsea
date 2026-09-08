@@ -84,6 +84,13 @@ export default function RootLayout({
             `,
           }}
         />
+
+        {/* Triangle Analytics */}
+        <script
+          defer
+          src="https://triangle-analytics.vercel.app/tracker.js"
+          data-site-id="tri_243919"
+        />
       </head>
       <body className="font-sans antialiased">
         <CurrencyProvider>
